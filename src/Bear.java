@@ -1,24 +1,22 @@
+//Patern State
 public class Bear {
-    private String state;
+    private State state;
     public Bear() {
-        setState("not sleeping");
+        setState(new NotSleepingState());
     }
     public void attack() {
-        if (state.equals("not sleeping")) System.out.println("GroaaR");
-        if (state.equals("sleeping")) System.out.println("Zzzzzz");
+        state.attack(this);
     }
 
     public void sleep() {
-        if (state.equals("sleeping")) throw new RuntimeException("already sleeping");
-        else setState("sleeping");
+        state.sleep(this);
     }
 
     public void wakeup() {
-        if (state.equals("not sleeping")) throw new RuntimeException("already not sleeping");
-        else setState("not sleeping");
+        state.wakeup(this);
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state= state;
     }
 
